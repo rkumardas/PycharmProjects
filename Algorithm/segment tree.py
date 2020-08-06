@@ -58,7 +58,7 @@ class segment:
 
 
 if __name__ == "__main__":
-    arr = [5, 6, 3, 8, 7, 9, 4, 1, 2, 10]
+    arr = [5, 6, 3, 8, 7, 9, 4, 1, 2,1]
     print(len(arr))
     hi = segment(arr, 0, len(arr))
     print(hi.segtree)
