@@ -1,6 +1,6 @@
-# eg. 5,6,3,8,7,9,4,1,2]
+# eg. [5,6,3,8,7,9,4,1,2]
 # use for opreation on array like sum in range and updater qurries
-# use sum SUM for quries pass start, end and pass lengthen of array respectivly
+# use  SUM for sum range quries then pass start, end and pass lengthen of array respectivly
 # UPDATE pass index, updated value and length of array respectivly
 
 class segment:
@@ -9,8 +9,8 @@ class segment:
         self.arr = arr
         self.ai = 0
         self.start = start
-        self.end = end
-        self.segtree = [0 for j in range((2 * len(arr))-1)]
+        self.end = end-1
+        self.segtree = [0 for j in range((2 * len(arr)) - 1)]
         self._build(self.start, self.end)
         # print(self.segtree)
         # print(len((self.segtree)))
@@ -18,10 +18,10 @@ class segment:
     def _build(self, start, end, ai=0):
 
         mid = (start + end) // 2
-        # print("mid ",mid,"start ",start, "end ", end)
+        print("mid ",mid,"start ",start, "end ", end)
         if start == end:
-            self.segtree[ai] = self.arr[start]
-            return self.arr[start]
+            self.segtree[ai] = self.arr[end]
+            return self.arr[end]
 
         else:
             # print("next call")
@@ -49,19 +49,20 @@ class segment:
         temp = self.arr[index] - value
         self.segtree[ai] -= temp
         mid = (start + end) // 2
-        if index < mid and (2*len(self.arr))-1 > end:
+        if index < mid and (2 * len(self.arr)) - 1 > end:
             self.update(index, value, mid, start, 2 * ai + 1)
-        if index > mid and (2*len(self.arr))-1 > end:
+        if index > mid and (2 * len(self.arr)) - 1 > end:
             self.update(index, value, end, mid + 1, 2 * ai + 2)
 
         return self.segtree
 
 
 if __name__ == "__main__":
-    arr = [5, 6, 3, 8, 7, 9, 4, 1, 2]
-    hi = segment(arr, 0, len(arr) - 1)
+    arr = [5, 6, 3, 8, 7, 9, 4, 1, 2, 10]
+    print(len(arr))
+    hi = segment(arr, 0, len(arr))
     print(hi.segtree)
 
     # my = hi.sum(3, 7, len(arr) - 1)
-    gi = hi.update(5, 6, len(arr))
-    print(gi)
+    # gi = hi.update(5, 6, len(arr))
+    # print(gi)
